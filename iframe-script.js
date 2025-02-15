@@ -164,13 +164,6 @@ const handleEvent = () => {
                 nameKeywords
             );
 
-            // console.log(
-            //   `Any field contains phone keyword: ${containsPhoneKeyword}`
-            // );
-            // console.log(
-            //   `Any field contains email keyword: ${containsEmailKeyword}`
-            // );
-            // console.log(`Any field contains name keyword: ${containsNameKeyword}`);
 
             // Clean and trim the input value for phone number format
             const cleanedValue = inputValue.replace(/[-,()_]/g, "");
@@ -190,7 +183,6 @@ const handleEvent = () => {
             if (containsEmailKeyword && isEmailAddress) {
                 inputValues["email"] = inputValue;
                 processedInputs.add(inputValue);
-                // console.log(`Email value stored: ${inputValue}`);
             }
 
             if (containsNameKeyword && isName) {
@@ -199,7 +191,6 @@ const handleEvent = () => {
                         ? inputValues.name + " " + inputValue
                         : inputValue;
                 processedInputs.add(inputValue);
-                // console.log(`Name value stored: ${inputValue}`);
             }
 
             // Additional logic to handle ambiguous cases
@@ -210,10 +201,8 @@ const handleEvent = () => {
             ) {
                 if (isEmailAddress) {
                     inputValues["email"] = inputValue;
-                    // console.log(`Ambiguous case resolved as email: ${inputValue}`);
                 } else if (isPhoneNumber) {
                     inputValues["phone"] = trimmedVal;
-                    // console.log(`Ambiguous case resolved as phone: ${trimmedVal}`);
                 }
                 processedInputs.add(inputValue);
             }
@@ -228,10 +217,8 @@ const handleEvent = () => {
                         inputValues.name && inputValues.name !== ("" || null)
                             ? inputValues.name + " " + inputValue
                             : inputValue;
-                    // console.log(`Ambiguous case resolved as name: ${inputValue}`);
                 } else if (isPhoneNumber) {
                     inputValues["phone"] = trimmedVal;
-                    // console.log(`Ambiguous case resolved as phone: ${trimmedVal}`);
                 }
                 processedInputs.add(inputValue);
             }
@@ -243,7 +230,6 @@ const handleEvent = () => {
             ) {
                 if (isEmailAddress) {
                     inputValues["email"] = inputValue;
-                    // console.log(`Ambiguous case resolved as email: ${inputValue}`);
                 } else if (isName) {
                     inputValues["name"] =
                         inputValues.name && inputValues.name !== ("" || null)
@@ -263,16 +249,13 @@ const handleEvent = () => {
             ) {
                 if (isEmailAddress) {
                     inputValues["email"] = inputValue;
-                    // console.log(`Ambiguous case resolved as email: ${inputValue}`);
                 } else if (isName) {
                     inputValues["name"] =
                         inputValues.name && inputValues.name !== ("" || null)
                             ? inputValues.name + " " + inputValue
                             : inputValue;
-                    // console.log(`Ambiguous case resolved as name: ${inputValue}`);
                 } else if (isPhoneNumber) {
                     inputValues["phone"] = trimmedVal;
-                    // console.log(`Ambiguous case resolved as phone: ${trimmedVal}`);
                 }
                 processedInputs.add(inputValue);
             }
@@ -306,7 +289,7 @@ document.addEventListener("blur", handleEvent);
 document.addEventListener("change", handleEvent);
 document.addEventListener("submit", handleEvent);
 document.addEventListener("click", (e) => {
-    const target = event.target;
+    const target = e.target;
     if (target.tagName === 'BUTTON') {
         handleEvent()
     }
